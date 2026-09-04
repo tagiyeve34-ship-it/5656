@@ -1,0 +1,6 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_home" android:title="Ana səhifə"/>
+    <item android:id="@+id/nav_map" android:icon="@drawable/ic_map" android:title="Xəritə"/>
+    <item android:id="@+id/nav_calls" android:icon="@drawable/ic_phone" android:title="Zənglər"/>
+    <item android:id="@+id/nav_zones" android:icon="@drawable/ic_zone" android:title="Zonalar"/>
+</menu>
