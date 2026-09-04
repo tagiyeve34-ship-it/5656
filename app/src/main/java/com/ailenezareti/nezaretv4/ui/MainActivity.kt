@@ -27,6 +27,19 @@ class MainActivity : AppCompatActivity() {
         requestNotificationPermissionIfNeeded()
         if (savedInstanceState == null) show(HomeFragment())
         binding.bottomNav.setOnItemSelectedListener { item ->
+            val current = supportFragmentManager.findFragmentById(R.id.content)
+            val alreadyOpen = when (item.itemId) {
+                R.id.nav_home -> current is HomeFragment
+                R.id.nav_map -> current is MapFragment
+                R.id.nav_calls -> current is CallsFragment
+                R.id.nav_zones -> current is ZonesFragment
+                else -> false
+            }
+
+            // Eyni bölmənin ikonuna yenidən basanda Fragment-i yenidən yaratmırıq.
+            // Xəritədə açılmış aşağı panel və xəritənin vəziyyəti olduğu kimi qalır.
+            if (alreadyOpen) return@setOnItemSelectedListener true
+
             when (item.itemId) {
                 R.id.nav_home -> show(HomeFragment())
                 R.id.nav_map -> show(MapFragment())
@@ -36,6 +49,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        // Aktiv ikonun üstünə təkrar basmaq heç bir ekranı refresh/recreate etməsin.
+        binding.bottomNav.setOnItemReselectedListener { }
         loadInitialChild()
         registerPushToken()
     }
